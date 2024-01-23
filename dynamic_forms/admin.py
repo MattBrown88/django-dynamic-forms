@@ -59,7 +59,7 @@ class OptionsWidget(forms.MultiWidget):
         return mark_safe('<div style="display:inline-block;">' +
             ('<br />\n'.join(output)) + '</div>')
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         if self.is_localized:
             for widget in self.widgets:
                 widget.is_localized = self.is_localized
