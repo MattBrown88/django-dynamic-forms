@@ -75,12 +75,12 @@ class DFFMetaclass(type):
             # Copy all attributes from super's options not excluded here. No
             # need to check for leading _ as this is already sorted out on the
             # super class
-            for k, v in six.iteritems(super_opts):
+            for k, v in super_opts.items():
                 if k in excludes:
                     continue
                 opts[k] = v
             # Copy all attributes not starting with a '_' from this Meta class
-            for k, v in six.iteritems(meta.__dict__):
+            for k, v in meta.__dict__.items():
                 if k.startswith('_') or k in excludes:
                     continue
                 opts[k] = v
@@ -90,14 +90,14 @@ class DFFMetaclass(type):
         return new_class
 
 
-class BaseDynamicFormField(six.with_metaclass(DFFMetaclass)):
+class BaseDynamicFormField(metaclass=DFFMetaclass):
 
     cls = None
     display_label = None
     widget = None
 
     class Meta:
-        help_text = [six.string_types, '', (forms.CharField, forms.Textarea)]
+        help_text = [str, '', (forms.CharField, forms.Textarea)]
         required = [bool, True, forms.NullBooleanField]
 
     def __new__(cls, *args, **kwargs):
@@ -112,7 +112,7 @@ class BaseDynamicFormField(six.with_metaclass(DFFMetaclass)):
         self.set_options(**kwargs)
 
     def __str__(self):
-        if isinstance(self.cls, six.string_types):
+        if isinstance(self.cls, str):
             clsname = self.cls
         else:
             clsname = '%s.%s' % (self.cls.__module__, self.cls.__name__)
@@ -123,19 +123,19 @@ class BaseDynamicFormField(six.with_metaclass(DFFMetaclass)):
         }
 
     def construct(self, **kwargs):
-        if isinstance(self.cls, six.string_types):
+        if isinstance(self.cls, str):
             cls_type = load_class_from_string(self.cls)
         else:
             cls_type = self.cls
 
         f_kwargs = {}
-        for key, val in six.iteritems(self.options):
+        for key, val in self.options.items():
             f_kwargs[key] = val[1]
 
         f_kwargs['label'] = self.label
 
         if self.widget is not None:
-            if isinstance(self.widget, six.string_types):
+            if isinstance(self.widget, str):
                 widget_type = load_class_from_string(self.widget)
             else:
                 widget_type = self.widget
@@ -162,7 +162,7 @@ class BaseDynamicFormField(six.with_metaclass(DFFMetaclass)):
         return self.widget_attrs
 
     def set_options(self, **kwargs):
-        for key, value in six.iteritems(kwargs):
+        for key, value in kwargs.items():
             if key not in self.options:
                 raise KeyError('%s is not a valid option.' % key)
 
@@ -198,7 +198,7 @@ class ChoiceField(BaseDynamicFormField):
     display_label = _('Choices')
 
     class Meta:
-        choices = [six.string_types, '', (forms.CharField, forms.Textarea)]
+        choices = [str, '', (forms.CharField, forms.Textarea)]
 
     def construct(self, **kwargs):
         value = self.options.get('choices')[1]
