@@ -7,7 +7,7 @@ from importlib import import_module
 
 from django import forms
 from django.utils.decorators import classonlymethod
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 def format_display_label(cls_name):
