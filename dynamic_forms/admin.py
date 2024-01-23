@@ -21,7 +21,7 @@ class ReadOnlyWidget(forms.Widget):
         self.show_text = kwargs.pop('show_text', None)
         super(ReadOnlyWidget, self).__init__(attrs)
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         content = ''
         if value is not None:
             content = value
