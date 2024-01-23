@@ -4,19 +4,14 @@ from __future__ import unicode_literals
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.forms import CheckboxSelectMultiple
-from django.utils import six
 from django.utils.text import capfirst
 
 from dynamic_forms.forms import MultiSelectFormField
 
 
-try:
-    # SubfieldBase is deprecated in Django 1.8 and removed in 1.10
-    class BaseTextMultiSelectField(six.with_metaclass(models.SubfieldBase, models.TextField)):
-        pass
-except AttributeError:
-    class BaseTextMultiSelectField(models.TextField):
-        pass
+
+class BaseTextMultiSelectField(models.TextField):
+    pass
 
 
 class TextMultiSelectField(BaseTextMultiSelectField):
@@ -64,7 +59,7 @@ class TextMultiSelectField(BaseTextMultiSelectField):
         return self.to_python(value)
 
     def get_db_prep_value(self, value, connection=None, prepared=False):
-        if isinstance(value, six.string_types):
+        if isinstance(value, str):
             return value
         elif isinstance(value, list):
             return self.separate_values_by.join(value)
