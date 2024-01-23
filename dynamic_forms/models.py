@@ -10,7 +10,7 @@ from django.db import models
 from django.db.transaction import atomic
 from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
-from django.utils.encoding import force_text, python_2_unicode_compatible
+from django.utils.encoding import force_text
 from django.utils.html import format_html, format_html_join
 from django.utils.translation import ugettext_lazy as _
 
@@ -20,7 +20,6 @@ from dynamic_forms.fields import TextMultiSelectField
 from dynamic_forms.formfields import formfield_registry
 
 
-@python_2_unicode_compatible
 class FormModel(models.Model):
     name = models.CharField(_('Name'), max_length=50, unique=True)
     submit_url = models.CharField(_('Submit URL'), max_length=100, unique=True,
@@ -78,7 +77,6 @@ class FormModel(models.Model):
         super(FormModel, self).save(*args, **kwargs)
 
 
-@python_2_unicode_compatible
 class FormFieldModel(models.Model):
 
     parent_form = models.ForeignKey(FormModel, on_delete=models.CASCADE,
@@ -149,7 +147,6 @@ class FormFieldModel(models.Model):
         super(FormFieldModel, self).save(*args, **kwargs)
 
 
-@python_2_unicode_compatible
 class FormModelData(models.Model):
     form = models.ForeignKey(FormModel, on_delete=models.SET_NULL,
         related_name='data', null=True)
