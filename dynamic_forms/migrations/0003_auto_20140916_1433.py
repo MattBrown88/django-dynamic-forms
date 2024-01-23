@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='formfieldmodel',
             name='parent_form',
-            field=models.ForeignKey(related_name='fields', to='dynamic_forms.FormModel'),
+            field=models.ForeignKey(related_name='fields', to='dynamic_forms.FormModel', on_delete=models.CASCADE),
         ),
         migrations.AlterField(
             model_name='formmodeldata',
