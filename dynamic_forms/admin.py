@@ -6,7 +6,6 @@ import json
 from django import forms
 from django.contrib import admin
 from django.forms.utils import flatatt
-from django.utils import six
 from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
@@ -48,7 +47,7 @@ class OptionsWidget(forms.MultiWidget):
     def format_output(self, rendered_widgets, id_):
         output = []
         i = 0
-        for n, (r, w) in six.moves.zip(self.option_names, rendered_widgets):
+        for n, (r, w) in zip(self.option_names, rendered_widgets):
             output.append(
                 format_html(
                     '<label for="{0}_{1}">{2}:</label>{3}',
@@ -120,7 +119,7 @@ class OptionsField(forms.MultiValueField):
 
     def compress(self, data_list):
         data = {}
-        for name, value in six.moves.zip(self.option_names, data_list):
+        for name, value in zip(self.option_names, data_list):
             if value is not None:
                 data[name] = value
         return json.dumps(data)
