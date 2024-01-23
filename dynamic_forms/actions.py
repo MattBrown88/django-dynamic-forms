@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from django.core.serializers.json import DjangoJSONEncoder
 from django.template.loader import render_to_string
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from dynamic_forms.conf import settings
 from dynamic_forms.utils import RemovedIn06Warning, is_old_style_action
