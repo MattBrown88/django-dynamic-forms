@@ -50,7 +50,7 @@ class FormModelForm(forms.Form):
         """
         data = self.cleaned_data
         mapped_data = OrderedDict()
-        for key, field in self.model_fields.items()
+        for key, field in self.model_fields.items():
             df = formfield_registry.get(field.field_type)
             if df and df.do_display_data():
                 name = field.label
