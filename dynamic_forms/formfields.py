@@ -6,7 +6,6 @@ import re
 from importlib import import_module
 
 from django import forms
-from django.utils import six
 from django.utils.decorators import classonlymethod
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -35,7 +34,7 @@ class DynamicFormFieldRegistry(object):
         return self._fields.get(key)
 
     def get_as_choices(self):
-        for k, c in sorted(six.iteritems(self._fields)):
+        for k, c in sorted(self._fields.items()):
             yield k, c.get_display_label()
 
     def register(self, cls):
