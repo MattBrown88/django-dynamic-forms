@@ -7,7 +7,6 @@ from importlib import import_module
 
 from django import forms
 from django.utils.decorators import classonlymethod
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -91,7 +90,6 @@ class DFFMetaclass(type):
         return new_class
 
 
-@python_2_unicode_compatible
 class BaseDynamicFormField(six.with_metaclass(DFFMetaclass)):
 
     cls = None
