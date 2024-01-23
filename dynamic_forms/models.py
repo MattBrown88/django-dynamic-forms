@@ -4,7 +4,8 @@ from __future__ import unicode_literals
 import json
 from collections import OrderedDict
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
+
 from django.db import models
 from django.db.transaction import atomic
 from django.template.defaultfilters import slugify
