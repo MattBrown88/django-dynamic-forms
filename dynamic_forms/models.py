@@ -12,7 +12,7 @@ from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_str
 from django.utils.html import format_html, format_html_join
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from dynamic_forms.actions import action_registry
 from dynamic_forms.conf import settings
