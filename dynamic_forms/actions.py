@@ -7,7 +7,7 @@ import warnings
 from django.core.mail import send_mail
 from django.core.serializers.json import DjangoJSONEncoder
 from django.template.loader import render_to_string
-from django.utils import six
+
 from django.utils.translation import ugettext_lazy as _
 
 from dynamic_forms.conf import settings
@@ -23,7 +23,7 @@ class ActionRegistry(object):
         return self._actions.get(key)
 
     def get_as_choices(self):
-        for k, f in sorted(six.iteritems(self._actions)):
+        for k, f in sorted(self._actions.items()):
             yield k, f.label
 
     def register(self, func, label):
