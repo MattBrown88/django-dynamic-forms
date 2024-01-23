@@ -10,7 +10,7 @@ from django.db import models
 from django.db.transaction import atomic
 from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import format_html, format_html_join
 from django.utils.translation import ugettext_lazy as _
 
@@ -185,7 +185,7 @@ class FormModelData(models.Model):
             value = format_html_join('',
                 '<dt>{0}</dt><dd>{1}</dd>',
                 (
-                    (force_text(k), force_text(v))
+                    (force_str(k), force_str(v))
                     for k, v in self.json_value.items()
                 )
             )
