@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from collections import OrderedDict
 
 from django import forms
-from django.utils import six
 
 from dynamic_forms.formfields import formfield_registry
 
@@ -51,7 +50,7 @@ class FormModelForm(forms.Form):
         """
         data = self.cleaned_data
         mapped_data = OrderedDict()
-        for key, field in six.iteritems(self.model_fields):
+        for key, field in self.model_fields.items()
             df = formfield_registry.get(field.field_type)
             if df and df.do_display_data():
                 name = field.label
