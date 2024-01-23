@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
             name = 'FormFieldModel',
             fields = [
                 ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID'),),
-                ('parent_form', models.ForeignKey(to_field='id', to='dynamic_forms.FormModel'),),
+                ('parent_form', models.ForeignKey(to='dynamic_forms.FormModel', on_delete=models.CASCADE),),
                 ('field_type', models.CharField(max_length=255, choices=(
                     ('dynamic_forms.formfields.BooleanField', 'Boolean',),
                     ('dynamic_forms.formfields.ChoiceField', 'Choices',),
