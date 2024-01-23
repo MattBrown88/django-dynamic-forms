@@ -6,7 +6,7 @@ import json
 from django import forms
 from django.contrib import admin
 from django.forms.utils import flatatt
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
@@ -30,7 +30,7 @@ class ReadOnlyWidget(forms.Widget):
         final_attrs = self.build_attrs(attrs)
         return format_html('<span{0}>{1}</span>',
             flatatt(final_attrs),
-            force_text(content),
+            force_str(content),
         )
 
 
